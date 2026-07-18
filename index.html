@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>정성훈 | EY한영 AI Center 인턴 포트폴리오</title>
+    <meta name="description" content="EY한영 AI Center 인턴 지원을 위한 정성훈의 Physical AI 및 SCM 데이터 분석 포트폴리오입니다.">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- LEFT SIDEBAR: ALWAYS VISIBLE -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h1 class="sidebar-title">EY한영 AI Center 인턴 포트폴리오</h1>
+                <p class="sidebar-subtitle">실물 자재 흐름과 데이터 분석력을 융합한 SCM 및 Physical AI 플랫폼</p>
+                <div class="header-badges">
+                    <span class="badge badge-highlight"># Isaac Sim Concept</span>
+                    <span class="badge"># SCM & AI</span>
+                </div>
+            </div>
+
+            <!-- REQUIREMENTS CHECKLIST -->
+            <div class="req-list">
+                <div style="font-size: 0.8rem; font-weight: 700; color: #ffffff; border-bottom: 1px solid #1f2937; padding-bottom: 0.4rem; margin-bottom: 0.2rem;">
+                    📋 AI Center 핵심 요구자격 매칭
+                </div>
+                <div class="req-item">
+                    <b>1. AI / Gen AI / Data Science 프로젝트</b>
+                    <p>파생 변수를 반영한 케이민즈 군집화 및 랜덤포레스트 예측 알고리즘을 설계하여 유저 성향과 경기 잔류 확률을 머신러닝으로 도출하는 데이터 사이언스 모듈을 구현했습니다.</p>
+                    <span class="proof-link" onclick="showProof('code', 'ml_results')">🔍 실증 분석 결과표 확인</span>
+                </div>
+                <div class="req-item">
+                    <b>2. 데이터 전처리 및 Analytics 툴 활용</b>
+                    <p>3개년 대량 트랜잭션 수요 로그를 SQLite 및 Pandas를 활용해 정규화하고, 품목별 과거 변동성에 지수평활법과 Z-score 통계를 대입해 적정 안전재고와 ROP 기준을 연산하는 파이프라인을 구축했습니다.</p>
+                    <span class="proof-link" onclick="showProof('code', 'data_clean')">🔍 ROP 정합성 실증 데이터 확인</span>
+                </div>
+                <div class="req-item">
+                    <b>3. Physical AI 원천기술 [Isaac Sim / Omniverse]</b>
+                    <p>엔비디아 Isaac Sim의 자율 이동 로봇 물류 개념을 2D 환경으로 단순화해 구현했습니다. 다익스트라 최단 경로 연산 및 이송 상태에 따른 실시간 텔레메트리 위치 좌표 스트림을 우측 시뮬레이터 탭에서 구동하고 있습니다.</p>
+                    <span class="proof-link" onclick="showProof('sim')">🔍 3D 기반 시뮬레이터 실행</span>
+                </div>
+                <div class="req-item">
+                    <b>4. LLM API 활용 및 프롬프트 테스트</b>
+                    <p>OpenAI GPT API 연동을 가정한 대화형 인터랙티브 위젯을 우측 비즈니스 탭에 설계했습니다. 감사, 세무, 전략 탭을 누른 상태에서 쿼리를 입력하면 각 업무 컨텍스트에 특화된 프롬프트 분석 답변을 실시간으로 확인해 볼 수 있습니다.</p>
+                    <span class="proof-link" onclick="showProof('cases')">🔍 GPT API 프롬프트 플레이그라운드</span>
+                </div>
+                <div class="req-item">
+                    <b>5. 서비스라인 AI 비즈니스 지원</b>
+                    <p>EY의 주요 본부별 AI 컨설팅 시나리오를 수립했습니다. 감사 본부의 분산 원장 이상 거래 자동 탐지, 세무 본부의 공제 대상 분석, 파르테논 본부의 물류 경로 단축 및 재배치 이관 알고리즘을 상세 Use Case로 설계했습니다.</p>
+                    <span class="proof-link" onclick="showProof('cases')">🔍 서비스라인 유스케이스 열람</span>
+                </div>
+                <div class="req-item">
+                    <b>6. 생성형 AI / 머신러닝 / 통계분석 활용</b>
+                    <p>포트폴리오 하단 탭을 통해 파이썬 SCM 재배치 이송 최적화 알고리즘, 씨플플 다익스트라 로봇 경로 탐색 핵심 로직, 그리고 데이터웨어하우스 적재 검증을 위한 SQL 쿼리를 직접 조회하고 분석할 수 있는 체계를 마련했습니다.</p>
+                    <span class="proof-link" onclick="showProof('code', 'dijkstra')">🔍 핵심 소스코드 분석 검수</span>
+                </div>
+            </div>
+        </aside>
+
+        <!-- RIGHT PANEL: TABBED INTERFACE -->
+        <main class="main-panel">
+            <!-- Main Tabs -->
+            <div class="main-tabs">
+                <div class="main-tab active" data-main-tab="sim">🤖 Physical AI 시뮬레이터</div>
+                <div class="main-tab" data-main-tab="cases">💡 EY AI 비즈니스 활용</div>
+                <div class="main-tab" data-main-tab="code">🛠️ 기술 명세 & 코드</div>
+            </div>
+
+            <!-- TAB 1: SIMULATOR -->
+            <div class="main-tab-panel active" id="panel-sim">
+                <div class="card-title">
+                    <span>🤖 Physical AI OHT 물류 시뮬레이션</span>
+                    <span class="badge badge-highlight">Dijkstra Routing</span>
+                </div>
+                <p class="card-subtitle">NVIDIA Isaac Sim 물리 환경을 웹 기반으로 단순화하여 구현한 자율 주행 로봇의 이송 경로 연산기입니다.</p>
+                
+                <div class="sim-grid">
+                    <div class="canvas-container">
+                        <canvas id="simCanvas" width="400" height="240"></canvas>
+                    </div>
+                    <div class="sim-right-panel">
+                        <div class="status-panel">
+                            <div class="status-item">
+                                <span class="status-label">현재 목표 지점</span>
+                                <span class="status-value" id="targetDest">W001</span>
+                            </div>
+                            <div class="status-item">
+                                <span class="status-label">로봇 구동 상태</span>
+                                <span class="status-value" id="statusRobot">대기 중 [IDLE]</span>
+                            </div>
+                            <div class="status-item" style="grid-column: span 2;">
+                                <span class="status-label">로봇 실시간 좌표</span>
+                                <span class="status-value"><span id="posX">50</span>px , <span id="posY">48</span>px</span>
+                            </div>
+                        </div>
+
+                        <!-- Controls -->
+                        <div class="controls-inline">
+                            <select id="targetSelect" class="code-select" style="flex: 1;">
+                                <option value="W001">서울 실증 허브 [W001]</option>
+                                <option value="W002">경기 스마트 팩토리 [W002]</option>
+                                <option value="W003">인천 항공 물류 센터 [W003]</option>
+                                <option value="W004">부산 항만 센터 [W004]</option>
+                            </select>
+                            <button id="triggerBtn" class="btn btn-primary">이송 지시</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Telemetry logs -->
+                <div class="status-item">
+                    <span class="status-label" style="margin-bottom: 4px;">로봇 텔레메트리 실시간 로그 [Telemetry Stream]</span>
+                    <div class="telemetry-log" id="telLog"></div>
+                </div>
+
+                <!-- SCM Analytics Summary -->
+                <div class="scm-stats-row">
+                    <div class="scm-stat-card">
+                        <span class="status-label">데이터 규모</span>
+                        <span class="status-value" style="display:block; margin-top:0.2rem;">9.9만 건</span>
+                    </div>
+                    <div class="scm-stat-card">
+                        <span class="status-label">서비스 수준</span>
+                        <span class="status-value" style="display:block; margin-top:0.2rem;">95% [Z=1.65]</span>
+                    </div>
+                    <div class="scm-stat-card">
+                        <span class="status-label">조달 리드타임</span>
+                        <span class="status-value" style="display:block; margin-top:0.2rem;">5 일</span>
+                    </div>
+                    <div class="scm-stat-card">
+                        <span class="status-label">평균 결품율</span>
+                        <span class="status-value" style="display:block; margin-top:0.2rem;">1.82%</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 2: EY USE CASES & LLM PLAYGROUND -->
+            <div class="main-tab-panel" id="panel-cases">
+                <div class="card-title">
+                    <span>💡 서비스라인별 AI 비즈니스 활용 Use Case</span>
+                    <span class="badge badge-highlight">Gen AI Consulting</span>
+                </div>
+                <p class="card-subtitle">EY한영의 각 서비스라인에 적합한 데이터 분석 및 생성형 AI 활용 컨설팅 시나리오입니다.</p>
+                
+                <div class="usecase-tabs">
+                    <div class="usecase-tab active" data-tab="audit">회계감사 [Audit]</div>
+                    <div class="usecase-tab" data-tab="tax">세무자문 [Tax]</div>
+                    <div class="usecase-tab" data-tab="strategy">전략컨설팅 [Parthenon]</div>
+                </div>
+
+                <div class="usecase-content">
+                    <h3 class="usecase-title" id="usecaseTitle">회계감사 [Audit] AI 활용 및 데이터 검증 지원</h3>
+                    <p class="usecase-detail" id="usecaseDetail">전통적인 샘플링 감사 기법을 넘어, 전사적 트랜잭션 데이터를 지능적으로 검증하고 이상 항목을 추출하여 감사의 정밀도를 높입니다.</p>
+                    <ul class="usecase-detail usecase-bullets" id="usecaseBullets">
+                        <li><b>이상 거래 탐지:</b> 분산 원장 로그 데이터를 정규화하여 회계 기준과 다른 변칙 거래 패턴을 머신러닝으로 분석</li>
+                        <li><b>문서 자동 파싱:</b> 계약서 및 영수증 이미지 자료에서 키 가치 정보와 일자, 수량을 추출하여 정합성 검수 자동화</li>
+                        <li><b>감사 위험 예측:</b> 기업 규모와 과거 재무 상태 데이터를 머신러닝 분류 모델에 대입하여 감사 위험 단계 선제 식별</li>
+                    </ul>
+
+                    <!-- LLM API PLAYGROUND -->
+                    <div style="border-top: 1px solid #1f2937; padding-top: 0.8rem; margin-top: 0.4rem;">
+                        <span class="status-label" style="margin-bottom: 4px; display: block;">OpenAI GPT API 기반 프롬프트 분석기 시뮬레이션</span>
+                        <div style="display: flex; gap: 0.5rem;">
+                            <input type="text" id="llmInput" class="code-select" style="flex: 1; text-align: left;" placeholder="프롬프트 쿼리를 입력하세요...">
+                            <button id="llmBtn" class="btn btn-primary" style="font-size: 0.78rem; padding: 0.4rem 0.8rem;">API 호출</button>
+                        </div>
+                        <div id="llmOutput" style="font-family: monospace; font-size: 0.72rem; color: #10b981; background: #09090b; border: 1px solid #1f2937; border-radius: 4px; padding: 0.5rem; margin-top: 0.5rem; display: none; white-space: pre-wrap;"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 3: CODE VIEWER -->
+            <div class="main-tab-panel" id="panel-code">
+                <div class="code-viewer-container">
+                    <div class="code-header-row">
+                        <span class="code-title">🛠️ 기술 구현 명세 및 핵심 알고리즘 뷰어</span>
+                        <select id="codeSelect" class="code-select">
+                            <option value="dijkstra">C++ Dijkstra Path Planning</option>
+                            <option value="reallocation">Python SCM Reallocation</option>
+                            <option value="analytics">SQL SCM Inventory Analytics</option>
+                            <option value="ml_results">머신러닝 분석 실증 결과 [K-Means & RF]</option>
+                            <option value="data_clean">데이터 전처리 및 ROP 통계 실증 결과</option>
+                        </select>
+                    </div>
+                    <pre class="code-content" id="codeContent"></pre>
+                </div>
+            </div>
+
+            <footer class="footer">
+                ⚙️ EY한영 AI Center 인턴 지원 포트폴리오  |  제작자: 정성훈
+            </footer>
+        </main>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
