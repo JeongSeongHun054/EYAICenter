@@ -12,20 +12,22 @@ body {
     font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
     line-height: 1.4;
     overflow: hidden;
-    padding: 1rem;
+    padding: 0.8rem 1rem 0;
     height: 100vh;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
+    box-sizing: border-box;
 }
 
 .dashboard-container {
     width: 100%;
     max-width: 1360px;
-    height: calc(100vh - 2rem);
+    flex: 1;
     display: grid;
     grid-template-columns: 340px 1fr;
     gap: 1rem;
+    min-height: 0;
 }
 
 /* Sidebar layout */
@@ -402,12 +404,14 @@ canvas {
 }
 
 .footer {
+    width: 100%;
+    max-width: 1360px;
     text-align: center;
     color: #a1a1aa;
     font-size: 0.8rem;
     font-weight: 500;
-    margin-top: 0.8rem;
     border-top: 1px solid #1f2937;
-    padding-top: 0.7rem;
-    padding-bottom: 0.7rem;
+    padding: 0.6rem 0;
+    flex-shrink: 0;
 }
+
