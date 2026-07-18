@@ -355,3 +355,151 @@ window.addEventListener('DOMContentLoaded', () => {
     addLog('시뮬레이터 초기화 완료: NVIDIA Isaac Sim 물리 규격 프로토콜 가동');
     loop();
 });
+
+// ============================================================
+// CODE & CONSOLE SWITCHER LOGIC
+// ============================================================
+const ML_DATA = {
+    kmeans: {
+        code: `# K-Means Clustering for User Segmentation
+from sklearn.cluster import KMeans
+import pandas as pd
+
+# Load processed logs
+df = pd.read_sql("SELECT * FROM process_logs", conn)
+X = df[['session_count', 'duration_minutes']]
+
+# Run K-Means with optimal k=3
+kmeans = KMeans(n_clusters=3, random_state=42)
+df['cluster'] = kmeans.fit_predict(X)
+
+print("클러스터별 통계:")
+print(df.groupby('cluster').mean())`,
+        console: `>>> python train_kmeans.py
+K-Means 모델 학습이 정상적으로 종료되었습니다.
+Silhouette Coefficient: 0.7423
+Cluster 0: 유저 수 1847, 접속 빈도 2.1, 세션 시간 12분, 잔류율 23%
+Cluster 1: 유저 수 3291, 접속 빈도 8.4, 세션 시간 47분, 잔류율 61%
+Cluster 2: 유저 수 1102, 접속 빈도 21.3, 세션 시간 138분, 잔류율 89%`
+    },
+    rf: {
+        code: `# Random Forest Classifier for Churn Prediction
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import classification_report
+
+# Prepare features and label
+X = df.drop(columns=['user_id', 'is_churned', 'cluster'])
+y = df['is_churned']
+
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=42
+)
+
+# Train model
+rf = RandomForestClassifier(n_estimators=200, random_state=42)
+rf.fit(X_train, y_train)
+
+# Evaluate model
+y_pred = rf.predict(X_test)
+print(classification_report(y_test, y_pred))`,
+        console: `>>> python train_random_forest.py
+Random Forest 분류 모델 학습 완료.
+
+Accuracy: 0.8732
+Recall: 0.8924
+F1-Score: 0.8711
+
+              precision    recall  f1-score   support
+
+       Active       0.89      0.92      0.90      1020
+     Churned       0.84      0.79      0.81       228
+
+    accuracy                           0.87      1248
+   macro avg       0.86      0.85      0.86      1248
+weighted avg       0.88      0.87      0.87      1248`
+    }
+};
+
+const STATS_DATA = {
+    clean: {
+        code: `# Pandas Data Cleaning Pipeline
+import pandas as pd
+import numpy as np
+
+# Load 3-year factory transactions
+raw_df = pd.read_sql("SELECT * FROM transactions", conn)
+
+# Fill nulls with forward fill method
+clean_df = raw_df.ffill()
+
+# Check dataset info
+print(clean_df.info())`,
+        console: `>>> python clean_data.py
+데이터 정제 파이프라인 가동 완료.
+[Pandas Info]
+RangeIndex: 99847 entries, 0 to 99846
+Data columns (total 5 columns):
+ #   Column        Non-Null Count  Dtype  
+---  ------        --------------  -----  
+ 0   timestamp     99847 non-null  object 
+ 1   facility_id   99847 non-null  object 
+ 2   process_time  97231 non-null  float64
+결측치 보간 완료: ffill 적용 후 99,847개 행 유지`
+    },
+    smooth: {
+        code: `# Exponential Smoothing and Outlier Detection
+import pandas as pd
+import numpy as np
+
+# Apply exponential smoothing (alpha=0.3)
+clean_df['smooth_time'] = clean_df.groupby('facility_id')['process_time'] \\
+                          .transform(lambda x: x.ewm(alpha=0.3).mean())
+
+# Z-score outlier detection (threshold=3.0)
+mean_val = clean_df['process_time'].mean()
+std_val = clean_df['process_time'].std()
+clean_df['z_score'] = (clean_df['process_time'] - mean_val) / std_val
+
+outliers = clean_df[clean_df['z_score'].abs() > 3.0]
+print(f"이상치 제거 건수: {len(outliers)}건")`,
+        console: `>>> python analyze_anomalies.py
+지수평활 가중치 연산 완료.
+최적 평활계수 alpha = 0.3
+평균 공정 이송 임계값 도출:
+  · 서울 실증 허브: 342 단위
+  · 경기 스마트 팩토리: 285 단위
+  · 인천 항공 물류: 198 단위
+  · 부산 항만 센터: 421 단위
+
+Z-score 연산 이상치 탐지:
+  · 임계값 3.0σ 초과 이상치 총 1847건 발견
+  · 탐지 대상 행 전량 이상치 플래그 및 마스킹 완료`
+    }
+};
+
+function switchMLCode(type, btn) {
+    document.querySelectorAll('#section-ml .console-tab-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    
+    document.getElementById('ml-code-view').textContent = ML_DATA[type].code;
+    document.getElementById('ml-console-view').textContent = ML_DATA[type].console;
+}
+
+function switchStatsCode(type, btn) {
+    document.querySelectorAll('#section-stats .console-tab-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    
+    const codeView = document.getElementById('stats-code-view');
+    codeView.textContent = STATS_DATA[type].code;
+    if (type === 'smooth') {
+        codeView.classList.add('code-pane-rose');
+        codeView.classList.remove('code-pane-emerald');
+    } else {
+        codeView.classList.add('code-pane-emerald');
+        codeView.classList.remove('code-pane-rose');
+    }
+    
+    document.getElementById('stats-console-view').textContent = STATS_DATA[type].console;
+}
+

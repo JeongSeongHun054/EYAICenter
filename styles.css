@@ -557,3 +557,93 @@ body {
   font-size: 0.8rem;
   color: var(--text-muted);
 }
+
+/* ═══════════════════════════════════════════
+   CODE & CONSOLE VIEWER STYLES
+═══════════════════════════════════════════ */
+.code-console-wrapper {
+  margin-top: 1.5rem;
+  border-top: 1px solid var(--border);
+  padding-top: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  grid-column: span 2;
+}
+.code-console-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.2rem;
+}
+.code-console-title {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+.code-console-tabs {
+  display: flex;
+  gap: 0.4rem;
+}
+.console-tab-btn {
+  padding: 0.35rem 0.8rem;
+  background: var(--bg-card-alt);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.2s;
+}
+.console-tab-btn:hover {
+  color: var(--text-primary);
+  background: rgba(255,255,255,0.02);
+}
+.console-tab-btn.active {
+  background: rgba(255,255,255,0.06);
+  border-color: var(--border-bright);
+  color: var(--text-primary);
+}
+.code-console-body {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 0.8rem;
+}
+.pane-container {
+  display: flex;
+  flex-direction: column;
+}
+.pane-label {
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 0.4rem;
+  letter-spacing: 0.05em;
+}
+.code-pane, .console-pane {
+  background: #020207;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 0.8rem;
+  font-family: 'SF Mono', 'Fira Code', monospace;
+  font-size: 0.72rem;
+  line-height: 1.5;
+  overflow-x: auto;
+  height: 220px;
+}
+.code-pane {
+  color: #a5d6ff;
+  border-left: 2px solid var(--blue);
+  white-space: pre;
+}
+.console-pane {
+  color: #34d399;
+  border-left: 2px solid var(--emerald);
+  white-space: pre-wrap;
+}
+.code-pane-rose { border-left-color: var(--rose); }
+.code-pane-emerald { border-left-color: var(--emerald); }
+

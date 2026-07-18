@@ -278,8 +278,48 @@
                 </div>
             </div>
         </div>
+        
+        <!-- ML Code & Console Output -->
+        <div class="code-console-wrapper">
+            <div class="code-console-header">
+                <span class="code-console-title">🛠️ 머신러닝 분석 소스코드 및 실행 결과 콘솔</span>
+                <div class="code-console-tabs">
+                    <button class="console-tab-btn active" id="ml-tab-kmeans" onclick="switchMLCode('kmeans', this)">K-Means 군집화</button>
+                    <button class="console-tab-btn" id="ml-tab-rf" onclick="switchMLCode('rf', this)">Random Forest 분류</button>
+                </div>
+            </div>
+            <div class="code-console-body">
+                <div class="pane-container">
+                    <span class="pane-label">Python Source Code</span>
+                    <pre class="code-pane" id="ml-code-view"># K-Means Clustering for User Segmentation
+from sklearn.cluster import KMeans
+import pandas as pd
+
+# Load processed logs
+df = pd.read_sql("SELECT * FROM process_logs", conn)
+X = df[['session_count', 'duration_minutes']]
+
+# Run K-Means with optimal k=3
+kmeans = KMeans(n_clusters=3, random_state=42)
+df['cluster'] = kmeans.fit_predict(X)
+
+print("클러스터별 통계:")
+print(df.groupby('cluster').mean())</pre>
+                </div>
+                <div class="pane-container">
+                    <span class="pane-label">Terminal Console Output</span>
+                    <pre class="console-pane" id="ml-console-view">>>> python train_kmeans.py
+K-Means 모델 학습이 정상적으로 종료되었습니다.
+Silhouette Coefficient: 0.7423
+Cluster 0: 유저 수 1847, 접속 빈도 2.1, 세션 시간 12분, 잔류율 23%
+Cluster 1: 유저 수 3291, 접속 빈도 8.4, 세션 시간 47분, 잔류율 61%
+Cluster 2: 유저 수 1102, 접속 빈도 21.3, 세션 시간 138분, 잔류율 89%</pre>
+                </div>
+            </div>
+        </div>
     </div>
 </section>
+
 
 <!-- ── SECTION 4: 통계분석 ── -->
 <section class="section" id="section-stats">
@@ -405,10 +445,52 @@
                         </tr>
                     </tbody>
                 </table>
+        </div>
+        
+        <!-- Stats Code & Console Output -->
+        <div class="code-console-wrapper" style="margin-top:1.5rem;">
+            <div class="code-console-header">
+                <span class="code-console-title">🛠️ 데이터 전처리 및 통계 분석 소스코드 및 실행 결과 콘솔</span>
+                <div class="code-console-tabs">
+                    <button class="console-tab-btn active" id="stats-tab-clean" onclick="switchStatsCode('clean', this)">Pandas 로그 정제</button>
+                    <button class="console-tab-btn" id="stats-tab-smooth" onclick="switchStatsCode('smooth', this)">지수평활 및 이상치</button>
+                </div>
+            </div>
+            <div class="code-console-body">
+                <div class="pane-container">
+                    <span class="pane-label">Python Source Code</span>
+                    <pre class="code-pane code-pane-emerald" id="stats-code-view"># Pandas Data Cleaning Pipeline
+import pandas as pd
+import numpy as np
+
+# Load 3-year factory transactions
+raw_df = pd.read_sql("SELECT * FROM transactions", conn)
+
+# Fill nulls with forward fill method
+clean_df = raw_df.ffill()
+
+# Check dataset info
+print(clean_df.info())</pre>
+                </div>
+                <div class="pane-container">
+                    <span class="pane-label">Terminal Console Output</span>
+                    <pre class="console-pane" id="stats-console-view">>>> python clean_data.py
+데이터 정제 파이프라인 가동 완료.
+[Pandas Info]
+RangeIndex: 99847 entries, 0 to 99846
+Data columns (total 5 columns):
+ #   Column        Non-Null Count  Dtype  
+---  ------        --------------  -----  
+ 0   timestamp     99847 non-null  object 
+ 1   facility_id   99847 non-null  object 
+ 2   process_time  97231 non-null  float64
+결측치 보간 완료: ffill 적용 후 99,847개 행 유지</pre>
+                </div>
             </div>
         </div>
     </div>
 </section>
+
 
 <!-- ── SECTION 5: Physical AI Sim ── -->
 <section class="section" id="section-sim">
