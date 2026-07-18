@@ -172,7 +172,7 @@ body {
     flex: 1;
     overflow-y: auto;
     display: none;
-    height: calc(100% - 7rem);
+    height: calc[100% - 3.5rem];
 }
 
 .main-tab-panel.active {
@@ -406,8 +406,8 @@ canvas {
     color: #a1a1aa;
     font-size: 0.8rem;
     font-weight: 500;
-    margin-top: auto;
-    margin-bottom: 0.6rem;
+    margin-top: 0.8rem;
     border-top: 1px solid #1f2937;
-    padding-top: 0.6rem;
+    padding-top: 0.7rem;
+    padding-bottom: 0.7rem;
 }
