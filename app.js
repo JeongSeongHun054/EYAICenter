@@ -116,16 +116,16 @@ def resolve_inventory_imbalance(stockouts, surpluses, cost_matrix):
             stockouts[d_idx] -= move_qty
             
     return transfers`,
-        analytics: `-- SQL SCM Inventory Risk Analytics
+        analytics: `-- SQL Smart Factory Bottleneck & Buffer Analytics
 SELECT 
-    w.name as warehouse_name,
-    COUNT(CASE WHEN i.current_stock = 0 THEN 1 END) as stockout_items_count,
-    COUNT(CASE WHEN i.current_stock > 0 AND i.current_stock < i.safety_stock THEN 1 END) as safety_breach_items_count,
-    COUNT(i.part_id) as total_items_count
-FROM warehouses w
-JOIN inventory_status i ON w.warehouse_id = i.warehouse_id
-GROUP BY w.warehouse_id, w.name
-ORDER BY stockout_items_count DESC;`,
+    f.name as factory_name,
+    COUNT(CASE WHEN a.current_buffer = 0 THEN 1 END) as bottleneck_alerts_count,
+    COUNT(CASE WHEN a.current_buffer > 0 AND a.current_buffer < a.buffer_threshold THEN 1 END) as buffer_breach_alerts_count,
+    COUNT(a.asset_id) as total_assets_count
+FROM factories f
+JOIN asset_status a ON f.factory_id = a.factory_id
+GROUP BY f.factory_id, f.name
+ORDER BY bottleneck_alerts_count DESC;`,
         ml_results: `=== K-Means 비지도학습 유저 군집화 결과: K-Means Clustering Profiles ===
 [대상 데이터: 2,481명 플레이어 행동 피처]
 
@@ -154,26 +154,26 @@ Cluster D    | 12.4%  |  5.8%  | 0.7  | +0.2 BB                 | Tight-Passive 
 4. 과거 승률 트렌드 [Win Rate Trend]               : 14.28%
 5. 누적 참여 판수 [Hand Count]                    : 9.96%`,
 
-        data_clean: `=== 데이터 전처리 및 ROP 안전재고 통계 분석 결과: Data Cleaning & ROP Report ===
-[원천 데이터: 3개년 99,762건 일일 수요 트랜잭션 로그]
+        data_clean: `=== 데이터 전처리 및 설비 버퍼 임계값 통계 분석 결과: Data Cleaning & Buffer Report ===
+[원천 데이터: 3개년 99,762건 일일 설비 가동 트랜잭션 로그]
 
 1. 데이터 품질 결측치 정제 내역:
    - 거래일자 date 포맷 통일 및 결측 타임스탬프 124건 보정
-   - 음수 수요량 및 아웃라이어 42건 제거
-   - 부품 사양 불일치 part_id / code mismatch 18건 교차 정합성 매핑 완료
+   - 음수 가동 시간 및 아웃라이어 42건 제거
+   - 설비 사양 불일치 part_id / code mismatch 18건 교차 정합성 매핑 완료
 
-2. 거점별 차량 부품 ROP 통계 연산 표: Sample Table
-   [안전재고 산출 공식: 1.65 * 주간 수요 표준편차 * sqrt[조달 리드타임 5일 / 7]]
-   [ROP 산출 공식: 일평균 수요량 * 조달 리드타임 5일 + 안전재고]
+2. 거점별 스마트팩토리 설비 임계값 통계 연산 표: Sample Table
+   [공정 버퍼 산출 공식: 1.65 * 주간 가동 변동 표준편차 * sqrt[이송 리드타임 5초 / 7]]
+   [이송 트리거 산출 공식: 일평균 가동 소요량 * 이송 리드타임 5초 + 공정 버퍼]
 
-거점 ID | 거점명               | 부품 ID | 일평균수요 | 주간표준편차 | 안전재고 | ROP 재발주점
+거점 ID | 거점명               | 설비 ID | 일평균소요 | 주간변동편차 | 공정버퍼 | 이송트리거
 --------------------------------------------------------------------------------------
 W001    | 서울 실증 허브       | P0001   | 45.2       | 12.4         | 17.3     | 243
 W001    | 서울 실증 허브       | P0002   | 12.8       |  4.2         |  5.9     |  70
 W002    | 경기 스마트 팩토리   | P0001   | 28.4       |  8.9         | 12.4     | 154
 W002    | 경기 스마트 팩토리   | P0002   |  8.5       |  2.7         |  3.8     |  46
-W003    | 인천 항공 물류 센터   | P0001   | 15.2       |  4.8         |  6.7     |  83
-W004    | 부산 항만 센터       | P0001   | 34.1       | 10.2         | 14.2     | 185`
+W003    | 인천 물류 거점       | P0001   | 15.2       |  4.8         |  6.7     |  83
+W004    | 부산 물류 거점       | P0001   | 34.1       | 10.2         | 14.2     | 185`
     };
 
     codeSelect.addEventListener("change", (e) => {
@@ -215,7 +215,7 @@ W004    | 부산 항만 센터       | P0001   | 34.1       | 10.2         | 14.
             title: "전략 및 재무자문 [Parthenon] AI 비즈니스 분석 지원",
             detail: "시장 분석, 공급망 효율성 개선 및 M&A 실사 과정에서 대규모 외부 데이터를 정리하여 신속한 정량 의사결정을 지원합니다.",
             bullets: [
-                "<b>SCM 공급망 비용 최적화:</b> 권역 허브의 수요 변동과 이송 거리를 가중치로 한 재고 배치 모델로 기업 물류비 절감 자문",
+                "<b>스마트팩토리 물류망 비용 최적화:</b> 권역 거점의 설비 변동과 이송 시간 가중치를 기준으로 한 자재 공급 재배치 최적화 모델 구축 자문",
                 "<b>M&A 시장 분석 리서치:</b> 웹 상의 비정형 뉴스 및 레포트 데이터를 정제하여 타겟 업종의 점유율 추이 및 평판 자동 분석",
                 "<b>생성형 AI 컨설팅 Use Case 발굴:</b> 고객사의 고유 인프라에 생성형 AI 기술을 접목할 때의 경제적 타당성 시뮬레이션 모델링"
             ]

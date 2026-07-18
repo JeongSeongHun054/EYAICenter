@@ -32,8 +32,8 @@
                 </div>
                 <div class="req-item">
                     <b>2. 데이터 전처리 및 Analytics 툴 활용</b>
-                    <p>3개년 대량 트랜잭션 수요 로그를 SQLite 및 Pandas를 활용해 정규화하고, 품목별 과거 변동성에 지수평활법과 Z-score 통계를 대입해 적정 안전재고와 ROP 기준을 연산하는 파이프라인을 구축했습니다.</p>
-                    <span class="proof-link" onclick="showProof('code', 'data_clean')">🔍 ROP 정합성 실증 데이터 확인</span>
+                    <p>3개년 대량의 설비 기동 트랜잭션 로그를 SQLite 및 Pandas로 정제하고, 기기별 상태 변동성에 지수평활법과 Z-score 통계를 적용해 공정 버퍼 임계값과 이송 트리거를 연산하는 파이프라인을 구축했습니다.</p>
+                    <span class="proof-link" onclick="showProof('code', 'data_clean')">🔍 임계값 정합성 실증 데이터 확인</span>
                 </div>
                 <div class="req-item">
                     <b>3. Physical AI 원천기술 [Isaac Sim / Omniverse]</b>
@@ -52,7 +52,7 @@
                 </div>
                 <div class="req-item">
                     <b>6. 생성형 AI / 머신러닝 / 통계분석 활용</b>
-                    <p>포트폴리오 하단 탭을 통해 파이썬 SCM 재배치 이송 최적화 알고리즘, 씨플플 다익스트라 로봇 경로 탐색 핵심 로직, 그리고 데이터웨어하우스 적재 검증을 위한 SQL 쿼리를 직접 조회하고 분석할 수 있는 체계를 마련했습니다.</p>
+                    <p>포트폴리오 하단 탭을 통해 파이썬 스마트팩토리 재배치 이송 최적화 알고리즘, 씨플플 다익스트라 로봇 경로 탐색 핵심 로직, 그리고 데이터웨어하우스 적재 검증을 위한 SQL 쿼리를 직접 조회하고 분석할 수 있는 체계를 마련했습니다.</p>
                     <span class="proof-link" onclick="showProof('code', 'dijkstra')">🔍 핵심 소스코드 분석 검수</span>
                 </div>
             </div>
@@ -114,22 +114,22 @@
                     <div class="telemetry-log" id="telLog"></div>
                 </div>
 
-                <!-- SCM Analytics Summary -->
+                <!-- Smart Factory Analytics Summary -->
                 <div class="scm-stats-row">
                     <div class="scm-stat-card">
                         <span class="status-label">데이터 규모</span>
                         <span class="status-value" style="display:block; margin-top:0.2rem;">9.9만 건</span>
                     </div>
                     <div class="scm-stat-card">
-                        <span class="status-label">서비스 수준</span>
+                        <span class="status-label">가동 신뢰도</span>
                         <span class="status-value" style="display:block; margin-top:0.2rem;">95% [Z=1.65]</span>
                     </div>
                     <div class="scm-stat-card">
-                        <span class="status-label">조달 리드타임</span>
-                        <span class="status-value" style="display:block; margin-top:0.2rem;">5 일</span>
+                        <span class="status-label">평균 이송 시간</span>
+                        <span class="status-value" style="display:block; margin-top:0.2rem;">5 초</span>
                     </div>
                     <div class="scm-stat-card">
-                        <span class="status-label">평균 결품율</span>
+                        <span class="status-label">공정 지연율</span>
                         <span class="status-value" style="display:block; margin-top:0.2rem;">1.82%</span>
                     </div>
                 </div>
