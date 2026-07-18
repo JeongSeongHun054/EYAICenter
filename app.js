@@ -87,13 +87,13 @@ void findShortestPath(int start, int end, const vector<vector<Edge>>& graph) {
     }
     cout << "Path cost: " << dist[end] << endl;
 }`,
-        reallocation: `# Python SCM Inventory Reallocation Solver
+        reallocation: `# Python Smart Factory Reallocation Solver
 import numpy as np
 
 def resolve_inventory_imbalance(stockouts, surpluses, cost_matrix):
     transfers = []
     
-    # Iterate through surplus and stockout warehouses
+    # Iterate through surplus and stockout factories
     for s_idx, surplus_qty in enumerate(surpluses):
         for d_idx, deficit_qty in enumerate(stockouts):
             if surplus_qty <= 0:
@@ -452,9 +452,9 @@ W004    | 부산 물류 거점       | P0001   | 34.1       | 10.2         | 14.
             } else {
                 response = `[API Response - gpt-4o-mini]\n` +
                            `입력 프롬프트: "${query}"\n` +
-                           `SCM 물류망 최적화 분석 결과: 이송 경로 단축 방안이 연산되었습니다.\n` +
+                           `스마트팩토리 물류망 최적화 분석 결과: 이송 경로 단축 방안이 연산되었습니다.\n` +
                            `• 최적 경로: W001 서울 실증 허브에서 W002 경기 스마트 팩토리로의 이송 단축\n` +
-                           `• 조치 추천: 다익스트라 이송 가중치 15% 감축을 위한 거점간 사전 재고 재배치`;
+                           `• 조치 추천: 다익스트라 이송 가중치 15% 감축을 위한 거점간 사전 자재 재배치`;
             }
             llmOutput.textContent = response;
         }, 1200);
