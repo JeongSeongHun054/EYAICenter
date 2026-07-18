@@ -118,15 +118,15 @@
                     <span class="card-title">📋 서비스라인 프롬프트 프리셋</span>
                 </div>
                 <div class="prompt-presets">
-                    <button class="preset-btn active" id="preset-0" onclick="selectPreset(0, this)">
+                    <button class="preset-btn active" id="preset-0">
                         <span class="preset-label">Audit 회계감사</span>
                         재무 데이터 이상 거래 패턴 탐지 및 감사 위험 평가
                     </button>
-                    <button class="preset-btn" id="preset-1" onclick="selectPreset(1, this)">
+                    <button class="preset-btn" id="preset-1">
                         <span class="preset-label">Tax 세무자문</span>
                         법인세 신고 데이터 기반 세액 공제 최적화 도출
                     </button>
-                    <button class="preset-btn" id="preset-2" onclick="selectPreset(2, this)">
+                    <button class="preset-btn" id="preset-2">
                         <span class="preset-label">Parthenon 전략컨설팅</span>
                         물류 네트워크 운영 효율화 기회 식별 및 전략 제언
                     </button>
@@ -147,7 +147,7 @@
                         <div class="llm-label">프롬프트 입력</div>
                         <div class="llm-input-row">
                             <textarea class="llm-textarea" id="llmInput" placeholder="분석 쿼리를 입력하거나 좌측 프리셋을 선택하세요..."></textarea>
-                            <button class="btn-api" id="llmBtn" onclick="runLLM()">API 호출</button>
+                            <button class="btn-api" id="llmBtn">API 호출</button>
                         </div>
                     </div>
                     <div>
@@ -284,8 +284,8 @@
             <div class="code-console-header">
                 <span class="code-console-title">🛠️ 머신러닝 분석 소스코드 및 실행 결과 콘솔</span>
                 <div class="code-console-tabs">
-                    <button class="console-tab-btn active" id="ml-tab-kmeans" onclick="switchMLCode('kmeans', this)">K-Means 군집화</button>
-                    <button class="console-tab-btn" id="ml-tab-rf" onclick="switchMLCode('rf', this)">Random Forest 분류</button>
+                    <button class="console-tab-btn active" id="ml-tab-kmeans">K-Means 군집화</button>
+                    <button class="console-tab-btn" id="ml-tab-rf">Random Forest 분류</button>
                 </div>
             </div>
             <div class="code-console-body">
@@ -452,8 +452,8 @@ Cluster 2: 유저 수 1102, 접속 빈도 21.3, 세션 시간 138분, 잔류율 
             <div class="code-console-header">
                 <span class="code-console-title">🛠️ 데이터 전처리 및 통계 분석 소스코드 및 실행 결과 콘솔</span>
                 <div class="code-console-tabs">
-                    <button class="console-tab-btn active" id="stats-tab-clean" onclick="switchStatsCode('clean', this)">Pandas 로그 정제</button>
-                    <button class="console-tab-btn" id="stats-tab-smooth" onclick="switchStatsCode('smooth', this)">지수평활 및 이상치</button>
+                    <button class="console-tab-btn active" id="stats-tab-clean">Pandas 로그 정제</button>
+                    <button class="console-tab-btn" id="stats-tab-smooth">지수평활 및 이상치</button>
                 </div>
             </div>
             <div class="code-console-body">
@@ -526,7 +526,7 @@ Data columns (total 5 columns):
                             <option value="W003">인천 항공 물류 센터 W003</option>
                             <option value="W004">부산 항만 센터 W004</option>
                         </select>
-                        <button class="btn-send" id="triggerBtn" onclick="triggerRoute()">🚀 이송 지시</button>
+                        <button class="btn-send" id="triggerBtn">🚀 이송 지시</button>
                     </div>
                     <div>
                         <div style="font-size:0.68rem;color:var(--text-muted);margin-bottom:0.4rem;">텔레메트리 로그</div>
@@ -565,9 +565,9 @@ Data columns (total 5 columns):
             <p class="section-desc">EY한영 각 서비스라인에 맞춘 생성형 AI 및 데이터 분석 컨설팅 시나리오</p>
         </div>
         <div class="usecase-tabs">
-            <button class="uc-tab active" onclick="switchTab('audit', this)">회계감사 Audit</button>
-            <button class="uc-tab" onclick="switchTab('tax', this)">세무자문 Tax</button>
-            <button class="uc-tab" onclick="switchTab('strategy', this)">전략컨설팅 Parthenon</button>
+            <button class="uc-tab active" id="uc-tab-audit">회계감사 Audit</button>
+            <button class="uc-tab" id="uc-tab-tax">세무자문 Tax</button>
+            <button class="uc-tab" id="uc-tab-strategy">전략컨설팅 Parthenon</button>
         </div>
 
         <div class="uc-content active" id="uc-audit">
@@ -608,6 +608,6 @@ Data columns (total 5 columns):
     ⚙️ EY한영 AI Center 인턴 지원 포트폴리오 &nbsp;|&nbsp; 제작자: 정성훈
 </footer>
 
-<script src="app.js"></script>
+<script src="app.js?v=20260718"></script>
 </body>
 </html>

@@ -72,10 +72,6 @@ function selectPreset(idx, btn) {
     document.getElementById('llmInput').value = PRESETS[idx].prompt;
 }
 
-// Init first preset
-window.addEventListener('DOMContentLoaded', () => {
-    document.getElementById('llmInput').value = PRESETS[0].prompt;
-});
 
 // ============================================================
 // LLM SIMULATION — typewriter stream
@@ -131,11 +127,6 @@ const chartObserver = new IntersectionObserver(entries => {
         }
     });
 }, { threshold: 0.25 });
-
-window.addEventListener('DOMContentLoaded', () => {
-    const chart = document.getElementById('featureChart');
-    if (chart) chartObserver.observe(chart);
-});
 
 // ============================================================
 // USE CASE TABS
@@ -354,6 +345,37 @@ function loop() {
 window.addEventListener('DOMContentLoaded', () => {
     addLog('시뮬레이터 초기화 완료: NVIDIA Isaac Sim 물리 규격 프로토콜 가동');
     loop();
+    
+    // Bind LLM presets
+    document.getElementById('preset-0').addEventListener('click', (e) => selectPreset(0, e.currentTarget));
+    document.getElementById('preset-1').addEventListener('click', (e) => selectPreset(1, e.currentTarget));
+    document.getElementById('preset-2').addEventListener('click', (e) => selectPreset(2, e.currentTarget));
+    
+    // Bind LLM trigger
+    document.getElementById('llmBtn').addEventListener('click', runLLM);
+    
+    // Bind ML code console tabs
+    document.getElementById('ml-tab-kmeans').addEventListener('click', (e) => switchMLCode('kmeans', e.currentTarget));
+    document.getElementById('ml-tab-rf').addEventListener('click', (e) => switchMLCode('rf', e.currentTarget));
+    
+    // Bind Stats code console tabs
+    document.getElementById('stats-tab-clean').addEventListener('click', (e) => switchStatsCode('clean', e.currentTarget));
+    document.getElementById('stats-tab-smooth').addEventListener('click', (e) => switchStatsCode('smooth', e.currentTarget));
+    
+    // Bind Simulator trigger
+    document.getElementById('triggerBtn').addEventListener('click', triggerRoute);
+    
+    // Bind Usecase tabs
+    document.getElementById('uc-tab-audit').addEventListener('click', (e) => switchTab('audit', e.currentTarget));
+    document.getElementById('uc-tab-tax').addEventListener('click', (e) => switchTab('tax', e.currentTarget));
+    document.getElementById('uc-tab-strategy').addEventListener('click', (e) => switchTab('strategy', e.currentTarget));
+    
+    // Bind Chart intersection observer
+    const chart = document.getElementById('featureChart');
+    if (chart) chartObserver.observe(chart);
+    
+    // Init preset input value
+    document.getElementById('llmInput').value = PRESETS[0].prompt;
 });
 
 // ============================================================
